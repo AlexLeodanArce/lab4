@@ -1,1 +1,24 @@
-<%# Update me %><%= @monster.inspect %>
+<h1><%= @monster.name %></h1>
+<p>
+    <%= @monster.description %>
+</p>
+<table border="3">
+    <thead>
+        <tr>
+            <th>Tweets</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% Tweet.where(monster_id: @monster.id).each do |t| %>
+                <tr>
+                    <td><%= t.content %></td>
+                </tr>
+        <% end %>
+    </tbody>
+</table>
+<br><br>
+<%= link_to "Volver al index", monsters_path %><br><br>
+<%= link_to "Eliminar", monster_path(@monster), data: { 'turbo-method': :delete, 'turbo-confirm': 'Estas seguro?' }, class: "btn btn-danger"%>
+<footer>
+    <p>Copyright &copy 2022</p>
+</footer>
